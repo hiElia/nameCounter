@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-using System.Text;
 
 namespace NameCounter
 {
@@ -13,24 +12,25 @@ namespace NameCounter
         }
         private void Run()
         {
-            var f = File.Open(args[0], FileMode.Open);
-            int pos = args[0].IndexOf('.');
-            string name = args[0].Substring(0, pos);            
-            System.IO.StreamReader file = new System.IO.StreamReader(f);
-            string line;
-            int counter = 0;
-            while (true)
-            {
-                line = file.ReadLine();
-                if (line == null) break; 
-                if (line.Contains(name)) 
-                    counter++;
-            }
+            var path = args[0]; 
+            string fileName = ExtractFileName(path);         
+            int counter = GetNumberOfTextAppearance(path, fileName);            
             Console.WriteLine("found " + counter);
         }
 
-        private int GetNumberOfTextAppearance(StreamReader file, string name)
+        private string ExtractFileName(string path)
         {
+            //todo: what can fail here? null reference
+            int position = path.IndexOf('.');
+            string name = path.Substring(0, position);
+            return name; 
+        }
+
+        private int GetNumberOfTextAppearance(string path, string name)
+        {
+            var fileStream = File.Open(path, FileMode.Open);
+            System.IO.StreamReader file = new System.IO.StreamReader(fileStream);
+
             string line;
             int counter = 0;
             while (true)
