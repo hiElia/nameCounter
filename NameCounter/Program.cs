@@ -18,13 +18,12 @@ namespace NameCounter
             string name = args[0].Substring(0, pos);            
             System.IO.StreamReader file = new System.IO.StreamReader(f);
             string line;
-            //int counter = 0;
-            int counter = GetNumberOfTextAppearance(file, name); 
+            int counter = 0;
             while (true)
             {
                 line = file.ReadLine();
-                if (line == null) break; //What if the file continues after empty line
-                if (line.Contains(name)) //What if there are multiple number of the name in every line
+                if (line == null) break; 
+                if (line.Contains(name)) 
                     counter++;
             }
             Console.WriteLine("found " + counter);
@@ -33,6 +32,7 @@ namespace NameCounter
         private int GetNumberOfTextAppearance(StreamReader file, string name)
         {
             string line;
+            int counter = 0;
             while (true)
             {
                 line = file.ReadLine();
@@ -40,6 +40,7 @@ namespace NameCounter
                 if (line.Contains(name)) //What if there are multiple number of the name in every line
                     counter++;
             }
+            return counter; 
         }
 
         static void Main(string[] args)
