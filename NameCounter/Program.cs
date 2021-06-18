@@ -6,6 +6,7 @@ namespace NameCounter
     class Program
     {
         public static string[] args;
+        //todo: why is there program under program
         Program(string[] args)
         {
             Program.args = args;
@@ -20,13 +21,14 @@ namespace NameCounter
 
         private string ExtractFileName(string path)
         {
+            var fileNameWithExtention = Path.GetFileName(path);
             //todo: what can fail here? null reference
-            int position = path.IndexOf('.');
-            string name = path.Substring(0, position);
+            int position = fileNameWithExtention.IndexOf('.');
+            string name = fileNameWithExtention.Substring(0, position);
             return name; 
         }
 
-        private int GetNumberOfTextAppearance(string path, string name)
+        private int GetNumberOfTextAppearance(string path, string searchTerm)
         {
             var fileStream = File.Open(path, FileMode.Open);
             System.IO.StreamReader file = new System.IO.StreamReader(fileStream);
@@ -37,7 +39,7 @@ namespace NameCounter
             {
                 line = file.ReadLine();
                 if (line == null) break; //What if the file continues after empty line
-                if (line.Contains(name)) //What if there are multiple number of the name in every line
+                if (line.Contains(searchTerm)) //What if there are multiple number of the name in every line
                     counter++;
             }
             return counter; 
