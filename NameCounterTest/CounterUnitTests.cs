@@ -28,12 +28,11 @@ namespace NameCounterTest
         [Fact]
         public void GetNumberOfTextAppearance_WithCorrectFileName_ReturnsFileNameWithoutExtention()
         {
-            var validPathName = @"C:\Users\User\Desktop\Sample.txt";
+            string path = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"TestDocuments\OneNamePerLine3.txt");
 
-            Assert.Equal("Sample", counterService.ExtractFileName(validPathName));
+            Assert.Equal("OneNamePerLine3", counterService.ExtractFileName(path));
         }
-        //string pathe = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"Data\Names.txt");
-        //string[] files = File.ReadAllLines(pathe);
+        
         //file with 3 appearance on 3 lines
         //file with 2 appearance on a single line
         //file with 2 appearance on empty line between
