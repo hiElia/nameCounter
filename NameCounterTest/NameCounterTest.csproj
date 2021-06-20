@@ -20,6 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\CounterService\ServiceLayer.csproj" />
     <ProjectReference Include="..\NameCounter\NameCounter.csproj" />
   </ItemGroup>
 
