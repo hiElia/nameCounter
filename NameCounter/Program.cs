@@ -36,6 +36,9 @@ namespace NameCounter
             Program program = new Program(args);
             program.Run();
         }
+        //What to improve
+        //Add logs
+        //Add DataLayer for simple data fetching
 
     }
 }
