@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace ServiceLayer
 {
@@ -16,12 +18,24 @@ namespace ServiceLayer
             {
                 line = file.ReadLine();
                 if (line == null) break; //What if the file continues after empty line
-                if (line.Contains(searchTerm)) //What if there are multiple number of the name in every line
-                    counter++;
+                counter += GetNumberOfTextAppearancePerLine(line, searchTerm); 
             }
             return counter;
         }
 
+        private int GetNumberOfTextAppearancePerLine(string line, string searchTerm)
+        {
+            //Assumption
+            //1. We are looking only for the name as a separate word, case insenstive, always separated by ' '
+            //2. Multiple instances on a single line should be counted.
+
+            if (string.IsNullOrEmpty(searchTerm))
+                throw new ArgumentException("The text to search cannot be empty!");
+            List<string> words = line.Split(' ').ToList();
+            var matchingWords = words.Where(w => string.Equals(w, searchTerm, StringComparison.InvariantCultureIgnoreCase));
+            return matchingWords.Count(); 
+        }
+       
         public string ExtractFileName(string path)
         {
             if (string.IsNullOrEmpty(path))

@@ -7,10 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="TestDocuments\MultipleNamePerLine4.txt" />
     <None Remove="TestDocuments\OneNamePerLine3.txt" />
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="TestDocuments\MultipleNamePerLine4.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="TestDocuments\OneNamePerLine3.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

@@ -21,20 +21,25 @@ namespace NameCounterTest
         [Fact]
         public void ExtractFileName_WithCorrectFileName_ReturnsFileNameWithoutExtention()
         {
-            var validPathName = @"C:\Users\User\Desktop\Sample.txt";
+            var validPathName = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"TestDocuments\OneNamePerLine3.txt");
 
             Assert.Equal("Sample", counterService.ExtractFileName(validPathName));
         }
         [Fact]
-        public void GetNumberOfTextAppearance_WithCorrectFileName_ReturnsFileNameWithoutExtention()
+        public void GetNumberOfTextAppearance_WithOneFileNamePerLineOn3Lines_Returns3()
         {
             string path = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"TestDocuments\OneNamePerLine3.txt");
 
-            Assert.Equal("OneNamePerLine3", counterService.ExtractFileName(path));
+            Assert.Equal(3, counterService.GetNumberOfTextAppearance(path, "OneNamePerLine3"));
         }
-        
-        //file with 3 appearance on 3 lines
-        //file with 2 appearance on a single line
+        [Fact]
+        public void GetNumberOfTextAppearance_With1LineContainingTheNameTwice_Returns2()
+        {
+            string path = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"TestDocuments\MultipleNamePerLine4.txt");
+
+            Assert.Equal(2, counterService.GetNumberOfTextAppearance(path, "MultipleNamePerLine4"));
+        }
+
         //file with 2 appearance on empty line between
         //file with empty content
         //file with content but no appearnce of name
