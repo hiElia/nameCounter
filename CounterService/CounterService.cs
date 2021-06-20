@@ -26,14 +26,29 @@ namespace ServiceLayer
         private int GetNumberOfTextAppearancePerLine(string line, string searchTerm)
         {
             //Assumption
-            //1. We are looking only for the name as a separate word, case insenstive, always separated by ' '
-            //2. Multiple instances on a single line should be counted.
+             //2. Multiple instances on a single line should be counted.
 
             if (string.IsNullOrEmpty(searchTerm))
                 throw new ArgumentException("The text to search cannot be empty!");
+
+            // Option 1
+            // Count only appearance as a separate word, case insenstive, always separated by ' '
+
             List<string> words = line.Split(' ').ToList();
             var matchingWords = words.Where(w => string.Equals(w, searchTerm, StringComparison.InvariantCultureIgnoreCase));
-            return matchingWords.Count(); 
+            return matchingWords.Count();
+
+            // Option 2.
+            // Count all appearances                    
+            //    List<int> indexes = new List<int>();
+            //    for (int index = 0; ; index += searchTerm.Length)
+            //    {
+            //        index = line.IndexOf(searchTerm, index);
+            //        if (index == -1)
+            //             break;
+            //        indexes.Add(index);
+            //    }
+            //return indexes.Count; 
         }
        
         public string ExtractFileName(string path)

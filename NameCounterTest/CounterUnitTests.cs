@@ -1,6 +1,5 @@
 using System;
 using Xunit;
-using NameCounter;
 using ServiceLayer;
 using System.IO;
 using System.Reflection;

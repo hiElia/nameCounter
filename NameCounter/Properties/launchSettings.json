@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "NameCounter": {
+      "commandName": "Project",
+      "commandLineArgs": "\"C:\\Users\\User\\Desktop\\Sample.txt\""
+    }
+  }
+}
