@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
-using ServiceLayer; 
+using ServiceLayer;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace NameCounter
 {
@@ -8,18 +9,22 @@ namespace NameCounter
     {
     
         public static string[] args;
-        //todo: why is there program under program
+
         Program(string[] args)
         {
             Program.args = args;
         }
         private void Run()
         {
-            var path = args[0]; 
-            
-            //todo : dependency injection 
-            var counterService = new CounterService();
+            var path = args[0];
 
+            //dependency injection 
+            var serviceProvider = new ServiceCollection()
+           .AddSingleton<ICounterService, CounterService>()
+           .BuildServiceProvider();
+            
+            var counterService = serviceProvider.GetService<ICounterService>();
+            
             string fileName = counterService.ExtractFileName(path);            
 
             int counter = counterService.GetNumberOfTextAppearance(path, fileName);
@@ -31,5 +36,6 @@ namespace NameCounter
             Program program = new Program(args);
             program.Run();
         }
+
     }
 }

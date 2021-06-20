@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace ServiceLayer
 {
-    public class CounterService
+    public class CounterService : ICounterService
     {
         public int GetNumberOfTextAppearance(string path, string searchTerm)
         {
